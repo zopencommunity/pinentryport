@@ -1,0 +1,43 @@
+export ZOPEN_TARBALL_URL="https://www.gnupg.org/ftp/gcrypt/pinentry/pinentry-1.2.1.tar.bz2"
+export ZOPEN_TARBALL_DEPS="make bzip2 tar curl perl automake autoconf m4 sed gettext zoslib diffutils libassuan libgpgerror"
+export ZOPEN_TYPE="TARBALL"
+export ZOPEN_COMP=CLANG
+export ZOPEN_CONFIGURE_OPTS=" --prefix=/home/haritha/zopen/prod/pinentry-1.2.1/ --enable-pinentry-tty"
+#export ZOPEN_CONFIGURE_OPTS=" --prefix=/home/haritha/zopen/prod/ --enable-pinentry-tty"
+#export ZOPEN_CONFIGURE_OPTS=" --enable-pinentry-tty"
+
+#export ZOPEN_NAME="pinentry"
+GPGERROR_VERSION="1.2.1"
+#rm -f pinentry 
+#echo "dh ZOPEN_NAME = ${ZOPEN_NAME}"
+#ln -s pinentry-1.2.1 ${ZOPEN_NAME}
+
+zopen_check_results()
+{
+  dir="$1"
+  pfx="$2"
+  chk="$1/$2_check.log"
+
+  # Echo the following information to gauge build health
+  echo "actualFailures:0"
+  echo "totalTests:1"
+  echo "expectedFailures:0"
+  echo "expectedTotalTests:1"
+}
+
+zopen_append_to_env()
+{
+  # echo envars outside of PATH, MANPATH, LIBPATH
+}
+
+zopen_append_to_setup()
+{
+  # echo commands that will run when installing via setup.sh
+}
+
+zopen_get_version()
+{
+  # Modify to echo the version of your tool/library
+  # Rather than hardcoding the version, obtain the version by running the tool/library
+  echo "1.0.0"
+}

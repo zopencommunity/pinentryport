@@ -1,0 +1,15 @@
+diff --git a/pinentry/pinentry-emacs.c b/pinentry/pinentry-emacs.c
+index 9685b67..e3d20dd 100644
+--- a/pinentry/pinentry-emacs.c
++++ b/pinentry/pinentry-emacs.c
+@@ -47,6 +47,10 @@
+ 
+ #include <assuan.h>
+ 
++#ifdef __MVS__
++#include <sys/time.h>
++#endif
++
+ #include "pinentry-emacs.h"
+ #include "memory.h"
+ #include "secmem-util.h"
