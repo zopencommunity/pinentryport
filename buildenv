@@ -3,14 +3,8 @@ export ZOPEN_TARBALL_DEPS="make bzip2 tar curl perl automake autoconf m4 sed get
 export ZOPEN_TYPE="TARBALL"
 export ZOPEN_COMP=CLANG
 export ZOPEN_CONFIGURE_OPTS=" --prefix=/home/haritha/zopen/prod/pinentry-1.2.1/ --enable-pinentry-tty"
-#export ZOPEN_CONFIGURE_OPTS=" --prefix=/home/haritha/zopen/prod/ --enable-pinentry-tty"
-#export ZOPEN_CONFIGURE_OPTS=" --enable-pinentry-tty"
 
-#export ZOPEN_NAME="pinentry"
-GPGERROR_VERSION="1.2.1"
-#rm -f pinentry 
-#echo "dh ZOPEN_NAME = ${ZOPEN_NAME}"
-#ln -s pinentry-1.2.1 ${ZOPEN_NAME}
+PINENTRY_VERSION="1.2.1"
 
 zopen_check_results()
 {
@@ -39,5 +33,5 @@ zopen_get_version()
 {
   # Modify to echo the version of your tool/library
   # Rather than hardcoding the version, obtain the version by running the tool/library
-  echo "1.0.0"
+  echo "$PINENTRY_VERSION"
 }
