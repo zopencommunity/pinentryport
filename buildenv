@@ -1,10 +1,13 @@
-export ZOPEN_TARBALL_URL="https://www.gnupg.org/ftp/gcrypt/pinentry/pinentry-1.2.1.tar.bz2"
+PINENTRY_VERSION="1.2.1"
+export ZOPEN_TARBALL_URL="https://www.gnupg.org/ftp/gcrypt/pinentry/pinentry-${PINENTRY_VERSION}.tar.bz2"
 export ZOPEN_TARBALL_DEPS="make bzip2 tar curl perl automake autoconf m4 sed gettext zoslib diffutils libassuan libgpgerror"
 export ZOPEN_TYPE="TARBALL"
 export ZOPEN_COMP=CLANG
-export ZOPEN_CONFIGURE_OPTS=" --prefix=/home/haritha/zopen/prod/pinentry-1.2.1/ --enable-pinentry-tty"
+export ZOPEN_EXTRA_CONFIGURE_OPTS=" --enable-pinentry-tty --disable-ncurses"
+export GPG_TTY=$(tty)
 
-PINENTRY_VERSION="1.2.1"
+rm -f pinentry
+ln -s pinentry-1.2.1 ${ZOPEN_NAME}
 
 zopen_check_results()
 {
@@ -28,7 +31,6 @@ zopen_append_to_setup()
 {
   # echo commands that will run when installing via setup.sh
 }
-
 zopen_get_version()
 {
   # Modify to echo the version of your tool/library
