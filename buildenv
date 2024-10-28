@@ -2,7 +2,7 @@
 PINENTRY_VERSION="1.2.1"
 
 export ZOPEN_STABLE_URL="https://www.gnupg.org/ftp/gcrypt/pinentry/pinentry-${PINENTRY_VERSION}.tar.bz2"
-export ZOPEN_STABLE_DEPS="make bzip2 tar curl perl automake autoconf m4 sed gettext zoslib diffutils libassuan libgpgerror"
+export ZOPEN_STABLE_DEPS="make bzip2 tar curl perl automake autoconf m4 sed gettext zoslib diffutils libassuan libgpgerror openssl"
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_COMP=CLANG
 export ZOPEN_EXTRA_CONFIGURE_OPTS=" --enable-pinentry-tty --disable-ncurses"
