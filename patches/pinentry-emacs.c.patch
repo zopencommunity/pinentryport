@@ -1,5 +1,5 @@
 diff --git a/pinentry/pinentry-emacs.c b/pinentry/pinentry-emacs.c
-index 9685b67..e3d20dd 100644
+index 7cac4a5..64b86b3 100644
 --- a/pinentry/pinentry-emacs.c
 +++ b/pinentry/pinentry-emacs.c
 @@ -47,6 +47,10 @@
@@ -11,5 +11,5 @@ index 9685b67..e3d20dd 100644
 +#endif
 +
  #include "pinentry-emacs.h"
- #include "memory.h"
+ #include "../secmem/secmem.h"
  #include "secmem-util.h"

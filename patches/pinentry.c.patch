@@ -1,15 +1,15 @@
 diff --git a/pinentry/pinentry.c b/pinentry/pinentry.c
-index ea11b67..84846bb 100644
+index b0184c4..b6ba1f3 100644
 --- a/pinentry/pinentry.c
 +++ b/pinentry/pinentry.c
-@@ -43,7 +43,9 @@
- #endif
+@@ -37,6 +37,10 @@
  
  #include <assuan.h>
--
+ 
 +#ifdef __MVS__
 +#include <sys/time.h>
 +#endif
- #include "memory.h"
++
  #include "secmem-util.h"
  #include "argparse.h"
+ #include "pinentry.h"
