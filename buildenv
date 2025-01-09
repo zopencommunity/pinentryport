@@ -3,26 +3,43 @@ PINENTRY_VERSION="1.3.1"
 
 export ZOPEN_STABLE_URL="https://www.gnupg.org/ftp/gcrypt/pinentry/pinentry-${PINENTRY_VERSION}.tar.bz2"
 export ZOPEN_CATEGORIES="security"
-export ZOPEN_STABLE_DEPS="make bzip2 tar curl perl automake autoconf m4 sed gettext zoslib diffutils libassuan libgpgerror openssl"
+export ZOPEN_STABLE_DEPS="make bzip2 tar curl perl automake autoconf m4 sed gettext zoslib diffutils libassuan libgpgerror openssl check_python"
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_COMP=CLANG
 export ZOPEN_EXTRA_CONFIGURE_OPTS=" --enable-pinentry-tty --disable-ncurses"
 export GPG_TTY=$(tty)
+export ZOPEN_CHECK="${PWD}/tests/test.py"
 
 rm -f pinentry
 ln -s "pinentry-${PINENTRY_VERYSION}" ${ZOPEN_NAME}
+
+# Requires pexpect for tests
+zopen_init()
+{
+  if ! type python3 >/dev/null ; then
+    printError "need python3 with pexpect package set up for build"
+  fi
+  python3 -m venv pinentry_python
+  . ./pinentry_python/bin/activate
+  pip3 install pexpect
+}
+
 
 zopen_check_results()
 {
   dir="$1"
   pfx="$2"
   chk="$1/$2_check.log"
+  totalTests=$(egrep "^Total tests:" $chk | awk '{ print $3}') 
+  failures=$(egrep "^Failed:" $chk | awk '{ print $2}')
+  
+# Echo the following information to guage build health
+cat <<TEST
+actualFailures:$failures
+totalTests:$totalTests
+expectedFailures:0
+TEST
 
-  # Echo the following information to gauge build health
-  echo "actualFailures:0"
-  echo "totalTests:1"
-  echo "expectedFailures:0"
-  echo "expectedTotalTests:1"
 }
 
 zopen_append_to_env()
