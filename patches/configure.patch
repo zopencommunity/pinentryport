@@ -1,8 +1,8 @@
 diff --git a/configure b/configure
-index 25c1c65..8edf6b3 100755
+index e39d1c2..d96f251 100755
 --- a/configure
 +++ b/configure
-@@ -7203,9 +7203,9 @@ $as_echo "$as_me: Use gpgrt-config with $gpgrt_libdir as gpg-error-config" >&6;}
+@@ -8207,9 +8207,9 @@ printf "%s\n" "$as_me: Use gpgrt-config with $gpgrt_libdir as gpg-error-config"
      req_minor=`echo $min_gpg_error_version | \
                 sed 's/\([0-9]*\)\.\([0-9]*\)/\2/'`
      major=`echo $gpg_error_config_version | \
@@ -14,3 +14,19 @@ index 25c1c65..8edf6b3 100755
      if test "$major" -gt "$req_major"; then
          ok=yes
      else
+@@ -14502,11 +14502,11 @@ else
+       if test "$pinentry_gnome_3" = "yes"; then
+         PINENTRY_DEFAULT=pinentry-gnome3
+       else
+-        if test "$pinentry_curses" = "yes"; then
+-          PINENTRY_DEFAULT=pinentry-curses
++        if test "$pinentry_tty" = "yes"; then
++          PINENTRY_DEFAULT=pinentry-tty
+         else
+-          if test "$pinentry_tty" = "yes"; then
+-            PINENTRY_DEFAULT=pinentry-tty
++          if test "$pinentry_curses" = "yes"; then
++            PINENTRY_DEFAULT=pinentry-curses
+           else
+             if test "$pinentry_w32" = "yes"; then
+               PINENTRY_DEFAULT=pinentry-w32

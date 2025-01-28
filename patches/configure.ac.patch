@@ -1,0 +1,20 @@
+diff --git a/configure.ac b/configure.ac
+index 4944f7c..968ea38 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -825,11 +825,11 @@ else
+       if test "$pinentry_gnome_3" = "yes"; then
+         PINENTRY_DEFAULT=pinentry-gnome3
+       else
+-        if test "$pinentry_curses" = "yes"; then
+-          PINENTRY_DEFAULT=pinentry-curses
++        if test "$pinentry_tty" = "yes"; then
++          PINENTRY_DEFAULT=pinentry-tty
+         else
+-          if test "$pinentry_tty" = "yes"; then
+-            PINENTRY_DEFAULT=pinentry-tty
++          if test "$pinentry_curses" = "yes"; then
++            PINENTRY_DEFAULT=pinentry-curses
+           else
+             if test "$pinentry_w32" = "yes"; then
+               PINENTRY_DEFAULT=pinentry-w32
