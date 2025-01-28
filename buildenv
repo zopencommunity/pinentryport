@@ -9,6 +9,7 @@ export ZOPEN_COMP=CLANG
 export ZOPEN_EXTRA_CONFIGURE_OPTS=" --enable-pinentry-tty --disable-ncurses"
 export GPG_TTY=$(tty)
 export ZOPEN_CHECK="${PWD}/tests/test.py"
+export ZOPEN_INSTALL="zopen_install"
 
 rm -f pinentry
 ln -s "pinentry-${PINENTRY_VERYSION}" ${ZOPEN_NAME}
@@ -40,6 +41,13 @@ totalTests:$totalTests
 expectedFailures:0
 TEST
 
+}
+
+zopen_install()
+{
+  make "$@"
+  rm -f $ZOPEN_INSTALL_DIR/bin/pinentry
+  ln -s pinentry-tty $ZOPEN_INSTALL_DIR/bin/pinentry
 }
 
 zopen_append_to_env()
