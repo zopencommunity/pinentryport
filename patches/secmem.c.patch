@@ -1,0 +1,42 @@
+diff --git a/secmem/secmem.c b/secmem/secmem.c
+index f32a83e..ba3e9da 100644
+--- a/secmem/secmem.c
++++ b/secmem/secmem.c
+@@ -159,7 +159,10 @@ lock_pool( void *p, size_t n )
+ 	show_warning = 1;
+     }
+ 
+-#else
++#elif defined __MVS__
++    (void)p;
++    (void)n;
++#else 
+     (void)p;
+     (void)n;
+     log_info("Please note that you don't have secure memory on this system\n");
+@@ -199,8 +202,12 @@ init_pool( size_t n)
+ 	    pool = (void*)-1;
+ 	}
+ 	else {
++#ifdef __MVS__
++	    pool = anon_mmap( 0, poolsize);
++#else
+ 	    pool = mmap( 0, poolsize, PROT_READ|PROT_WRITE,
+-				      MAP_PRIVATE, fd, 0);
++                                        MAP_PRIVATE, fd, 0);
++#endif
+ 	    close (fd);
+ 	}
+     }
+@@ -412,7 +419,11 @@ secmem_term(void)
+     wipememory2( pool, 0x00, poolsize);
+ #if HAVE_MMAP
+     if( pool_is_mmapped )
++  #ifdef __MVS__
++        anon_munmap(pool, poolsize);
++  #else
+ 	munmap( pool, poolsize );
++  #endif
+ #endif
+     pool = NULL;
+     pool_okay = 0;
