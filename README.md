@@ -1,4 +1,35 @@
 [![Automatic version updates](https://github.com/ZOSOpenTools/pinentryport/actions/workflows/bump.yml/badge.svg)](https://github.com/ZOSOpenTools/pinentryport/actions/workflows/bump.yml)
 
-# pinentry
-Pinentry is a small collection of dialog programs that allow GnuPG to read passphrases and PIN numbers in a secure manner
+# Pinentry
+
+A secure passphrase entry utility
+
+# Installation and Usage
+
+Use the zopen package manager ([QuickStart Guide](https://zopen.community/#/Guides/QuickStart)) to install:
+```bash
+zopen install pinentry
+```
+
+# Building from Source
+
+1. Clone the repository:
+```bash
+git clone https://github.com/zopencommunity/pinentryport.git
+cd pinentryport
+```
+2. Build using zopen:
+```bash
+zopen build -vv
+```
+
+See the [zopen porting guide](https://zopen.community/#/Guides/Porting) for more details.
+
+# Documentation
+
+
+# Troubleshooting
+TBD
+
+# Contributing
+Contributions are welcome! Please follow the [zopen contribution guidelines](https://github.com/zopencommunity/meta/blob/main/CONTRIBUTING.md).
