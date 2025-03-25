@@ -1,0 +1,70 @@
+diff --git a/pinentry/pinentry-emacs.c b/pinentry/pinentry-emacs.c
+index 7cac4a5..64b86b3 100644
+--- a/pinentry/pinentry-emacs.c
++++ b/pinentry/pinentry-emacs.c
+@@ -47,6 +47,10 @@
+ 
+ #include <assuan.h>
+ 
++#ifdef __MVS__
++#include <sys/time.h>
++#endif
++
+ #include "pinentry-emacs.h"
+ #include "../secmem/secmem.h"
+ #include "secmem-util.h"
+diff --git a/pinentry/pinentry.c b/pinentry/pinentry.c
+index b0184c4..2f56297 100644
+--- a/pinentry/pinentry.c
++++ b/pinentry/pinentry.c
+@@ -35,6 +35,10 @@
+ #include <locale.h>
+ #include <limits.h>
+ 
++#ifdef __MVS__
++#include <sys/time.h>
++#endif
++
+ #include <assuan.h>
+ 
+ #include "secmem-util.h"
+diff --git a/secmem/secmem.c b/secmem/secmem.c
+index f32a83e..e4be3b6 100644
+--- a/secmem/secmem.c
++++ b/secmem/secmem.c
+@@ -158,7 +158,9 @@ lock_pool( void *p, size_t n )
+ 	    log_error("can't lock memory: %s\n", strerror(errno));
+ 	show_warning = 1;
+     }
+-
++#elif defined __MVS__
++    (void)p;
++    (void)n;
+ #else
+     (void)p;
+     (void)n;
+@@ -199,8 +201,12 @@ init_pool( size_t n)
+ 	    pool = (void*)-1;
+ 	}
+ 	else {
++#ifdef __MVS__
++	    pool = anon_mmap( 0, poolsize);
++#else
+ 	    pool = mmap( 0, poolsize, PROT_READ|PROT_WRITE,
+ 				      MAP_PRIVATE, fd, 0);
++#endif
+ 	    close (fd);
+ 	}
+     }
+@@ -412,7 +418,11 @@ secmem_term(void)
+     wipememory2( pool, 0x00, poolsize);
+ #if HAVE_MMAP
+     if( pool_is_mmapped )
++#ifdef __MVS__
++	anon_munmap(pool, poolsize);
++#else
+ 	munmap( pool, poolsize );
++#endif
+ #endif
+     pool = NULL;
+     pool_okay = 0;

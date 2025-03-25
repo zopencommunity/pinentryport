@@ -4,6 +4,8 @@ PINENTRY_VERSION="1.3.1"
 export ZOPEN_STABLE_URL="https://www.gnupg.org/ftp/gcrypt/pinentry/pinentry-${PINENTRY_VERSION}.tar.bz2"
 export ZOPEN_CATEGORIES="security"
 export ZOPEN_STABLE_DEPS="make bzip2 tar curl perl automake autoconf m4 sed gettext zoslib diffutils libassuan libgpgerror openssl check_python"
+export ZOPEN_DEV_URL="https://github.com/gpg/pinentry.git"
+export ZOPEN_DEV_DEPS="make bzip2 tar curl perl automake autoconf m4 sed gettext zoslib diffutils libassuan libgpgerror openssl check_python texinfo"
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_COMP=CLANG
 export ZOPEN_EXTRA_CONFIGURE_OPTS=" --enable-pinentry-tty --disable-ncurses"
@@ -12,6 +14,15 @@ export ZOPEN_CHECK="${PWD}/tests/test.py"
 
 rm -f pinentry
 ln -s "pinentry-${PINENTRY_VERYSION}" ${ZOPEN_NAME}
+
+zopen_post_buildenv()
+{
+  if [ "${ZOPEN_BUILD_LINE}x" = "DEVx" ]; then
+    export ZOPEN_BOOTSTRAP="./autogen.sh"
+    export ZOPEN_BOOTSTRAP_OPTS=" --force"
+    export ZOPEN_EXTRA_CONFIGURE_OPTS=" -enable-maintainer-mode --enable-pinentry-tty --disable-ncurses"
+  fi
+}
 
 # Requires pexpect for tests
 zopen_init()
