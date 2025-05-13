@@ -9,6 +9,8 @@ export ZOPEN_COMP=CLANG
 export ZOPEN_EXTRA_CONFIGURE_OPTS=" --enable-pinentry-tty --disable-ncurses"
 export GPG_TTY=$(tty)
 export ZOPEN_CHECK="${PWD}/tests/test.py"
+export ZOPEN_EXTRA_CFLAGS="${ZOPEN_EXTRA_CFLAGS} -mzos-target=zosv2r5 -march=z13"
+export ZOPEN_SYSTEM_PREREQS="zos25"
 
 rm -f pinentry
 ln -s "pinentry-${PINENTRY_VERYSION}" ${ZOPEN_NAME}
