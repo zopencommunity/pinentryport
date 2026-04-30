@@ -1,8 +1,19 @@
 diff --git a/secmem/secmem.c b/secmem/secmem.c
-index f32a83e..ba3e9da 100644
+index f32a83e..e5bef3a 100644
 --- a/secmem/secmem.c
 +++ b/secmem/secmem.c
-@@ -159,7 +159,10 @@ lock_pool( void *p, size_t n )
+@@ -42,6 +42,10 @@
+ 
+ #include "util.h"
+ 
++#ifdef __MVS__
++#include <zos.h>
++#endif
++
+ typedef union {
+     int a;
+     short b;
+@@ -159,7 +163,10 @@ lock_pool( void *p, size_t n )
  	show_warning = 1;
      }
  
@@ -14,7 +25,7 @@ index f32a83e..ba3e9da 100644
      (void)p;
      (void)n;
      log_info("Please note that you don't have secure memory on this system\n");
-@@ -199,8 +202,12 @@ init_pool( size_t n)
+@@ -199,8 +206,12 @@ init_pool( size_t n)
  	    pool = (void*)-1;
  	}
  	else {
@@ -28,7 +39,7 @@ index f32a83e..ba3e9da 100644
  	    close (fd);
  	}
      }
-@@ -412,7 +419,11 @@ secmem_term(void)
+@@ -412,7 +423,11 @@ secmem_term(void)
      wipememory2( pool, 0x00, poolsize);
  #if HAVE_MMAP
      if( pool_is_mmapped )
