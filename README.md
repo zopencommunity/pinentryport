@@ -1,3 +1,5 @@
+[![CodeQL](https://github.com/zopencommunity/pinentryport/actions/workflows/codeql.yml/badge.svg)](https://github.com/zopencommunity/pinentryport/actions/workflows/codeql.yml)
+
 [![Automatic version updates](https://github.com/ZOSOpenTools/pinentryport/actions/workflows/bump.yml/badge.svg)](https://github.com/ZOSOpenTools/pinentryport/actions/workflows/bump.yml)
 
 # Pinentry
